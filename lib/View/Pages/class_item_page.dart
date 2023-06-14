@@ -29,6 +29,35 @@ class ClassItemPage extends StatelessWidget{
     days_string=days_string+listWithoutDuplicates[listWithoutDuplicates.length-1];
     return listWithoutDuplicates.toList();
   }
+  List<Map<String, List<String>>> getWorkingHoursMap(List<dynamic> workingHoursList) {
+    List<String> days = [];
+    List<Map<String, List<String>>> workingHoursMap = [];
+
+    // First, get a list of unique days
+    for (var i = 0; i < workingHoursList.length; i++) {
+      if (!days.contains(workingHoursList[i]['day']['name_ar'])) {
+        days.add(workingHoursList[i]['day']['name_ar']);
+      }
+    }
+
+    // Create a map for each unique day
+    for (var i = 0; i < days.length; i++) {
+      List<String> hours = [];
+
+      for (var j = 0; j < workingHoursList.length; j++) {
+        if (workingHoursList[j]['day']['name_ar'] == days[i]) {
+          hours.add(workingHoursList[j]['open_hour']);
+        }
+      }
+
+      // Sort the hours in ascending order
+      hours.sort((a, b) => a.compareTo(b));
+
+      workingHoursMap.add({days[i]: hours});
+    }
+
+    return workingHoursMap;
+  }
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> args = Get.arguments;
@@ -187,7 +216,14 @@ class ClassItemPage extends StatelessWidget{
 
                   SizedBox(height: 30,),
                   Center(
-                    child: ItemContainerGridButton("اختيار",60.0,120.0,(){print("its worked here"); Get.to(DetailsPage());}),
+                    child: ItemContainerGridButton("اختيار",60.0,120.0,(){print("its worked here");
+                    List<Map<String, List<String>>> workingHoursMap = getWorkingHoursMap(service["working_hours"]);
+                    for(int i =0;i<workingHoursMap.length;i++){
+                      print (i.toString()+workingHoursMap[i].keys.toString());
+                    }
+                    Get.to(DetailsPage(),arguments: {
+                      "working_hours":workingHoursMap
+                    });}),
                   )
 
                 ],

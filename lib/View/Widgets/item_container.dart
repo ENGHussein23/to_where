@@ -366,9 +366,12 @@ color_squer_hour(a,b){
       return Color.fromARGB(197, 8, 246, 103);
     return Colors.black12;
   }
-  return Container(
-      height: 30,
-      width: 40,
-      color: WhatColor(b),
-      child: Center(child: Text(a,style: TextStyle(color: Colors.black54),),));
+  return
+    GestureDetector(child: Container(
+        margin: EdgeInsets.all(3),
+        height: 30,
+        width: 80,
+        color: WhatColor(b),
+        child: Center(child: FittedBox(child: Text(a,style: TextStyle(color: Colors.black54,),),))),
+    onTap: (){print(a);},);
 }
