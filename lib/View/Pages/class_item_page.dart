@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:to_where/Controller/Constants/my_colors.dart';
 import 'package:to_where/Controller/Constants/strings.dart';
+import 'package:to_where/View/Pages/booking_page.dart';
 import 'package:to_where/View/Pages/details_page.dart';
 import 'package:to_where/View/Pages/service_loction_page.dart';
 import 'package:to_where/View/Widgets/MyTexts.dart';
@@ -222,7 +223,8 @@ class ClassItemPage extends StatelessWidget{
                       print (i.toString()+workingHoursMap[i].keys.toString());
                     }
                     Get.to(DetailsPage(),arguments: {
-                      "working_hours":workingHoursMap
+                      "working_hours":workingHoursMap,
+                      "service_id":service["id"].toString(),
                     });}),
                   )
 

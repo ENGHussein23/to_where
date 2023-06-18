@@ -356,22 +356,41 @@ class SelectHour extends StatelessWidget{
   }
 
 }
+class color_squer_hour extends StatefulWidget{
+  String? a;
+int? b;
+  color_squer_hour(this.a,this.b);
 
-
-color_squer_hour(a,b){
-  WhatColor(a){
-    if(a==1)
-      return Color.fromARGB(147, 246, 8, 8);
-    else if (a==2)
-      return Color.fromARGB(197, 8, 246, 103);
-    return Colors.black12;
+  @override
+  State<StatefulWidget> createState() {
+   return color_squer_hour_state(a!,b!);
   }
-  return
+}
+
+class color_squer_hour_state extends State<color_squer_hour>{
+  String a;
+  int b;
+
+  color_squer_hour_state(this.a, this.b);
+
+  @override
+  Widget build(BuildContext context) {
+      return
     GestureDetector(child: Container(
-        margin: EdgeInsets.all(3),
+        margin: const EdgeInsets.all(3),
         height: 30,
         width: 80,
-        color: WhatColor(b),
-        child: Center(child: FittedBox(child: Text(a,style: TextStyle(color: Colors.black54,),),))),
-    onTap: (){print(a);},);
+        color: b==1?b==2?const Color.fromARGB(147, 8, 246, 8):const Color.fromARGB(147, 246, 8, 8):Colors.black12,
+        child: Center(child: FittedBox(child: Text(a,style: const TextStyle(color: Colors.black54,),),))),
+    onTap: (){
+      // if(b==0){
+        setState(() {
+          b=2;
+        });
+        print("-----------------");
+      // }
+      print("''''''''''''''''''''");
+    },);
+  }
+
 }
